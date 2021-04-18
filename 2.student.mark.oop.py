@@ -1,25 +1,25 @@
 class Student:
     def __init__(self, id="", name="", dob=""):
         self.__id = id
-        self.name = name
+        self.__name = name
         self.__dob = dob
 
     def getId(self):
         return self.__id
 
     def getName(self):
-        return self.name
+        return self.__name
 
     def getDob(self):
         return self.__dob
 
     def input(self):
         self.__id = input("Enter Student Id: ")
-        self.name = input("Enter Student Name: ")
+        self.__name = input("Enter Student Name: ")
         self.__dob = input("Enter Student Date of Birth: ")
 
     def __str__(self):
-        return "Student: " + self.name + " with id of " + self.__id + " born in " + self.__dob
+        return "Student: " + self.__name + " with id of " + self.__id + " born in " + self.__dob
 
     def describe(self):
         print(self.__str__())
@@ -55,20 +55,20 @@ class Mark:
 class Course:
     def __init__(self, id="", name=""):
         self.__id = id
-        self.name = name
+        self.__name = name
 
     def getId(self):
         return self.__id
 
     def getName(self):
-        return self.name
+        return self.__name
 
     def input(self):
         self.__id = input("Enter Course Id: ")
-        self.name = input("Enter Course Name: ")
+        self.__name = input("Enter Course Name: ")
 
     def __str__(self):
-        return "Course: " + self.name + " with id of " + self.__id
+        return "Course: " + self.__name + " with id of " + self.__id
 
     def describe(self):
         print(self.__str__())
@@ -105,7 +105,6 @@ def choseCourse():
 
 
 def inputMark(Course):
-    print("Inputing Mark now")
     for i in range(NumberOfCourse):
         if Course == ListOfCourse[i].getName():
             for j in range(NumberStd):
@@ -115,7 +114,6 @@ def inputMark(Course):
 
 
 def printMark(Course):
-    print("Printing Mark now")
     for mark in Marks:
         if mark.getCourse() == Course:
             print([mark.getName(), mark.getMark()])
