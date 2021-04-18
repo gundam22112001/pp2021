@@ -67,7 +67,7 @@ def inputMark(Course):
     for i in range(len(Courses)):
         if Course == Courses["names"][i]:
             for j in range(len(ids)):
-                mark = input("Enter the mark of student "+str(j+1)+": ")
+                mark = input("Enter the mark of student "+str(j+1)+":")
                 Marks["name"].append(names[j])
                 Marks["mark"].append(mark)
 
@@ -76,7 +76,6 @@ def showMarks(Course):
     for i in range(len(Courses)):
         if Course == Courses["names"][i]:
             print(Marks)
-
 
 inputStd(inputNumberOfStd())
 inputCourse(inputNumberOfCourse())
