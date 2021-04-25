@@ -8,8 +8,8 @@ Marks = []
 
 # adding Student objects into array ClassRoom
 
-NumberOfStd = numberOfStd
-NumberOfCourse = numberOfCourse
+NumberOfStd = numberOfStd()
+NumberOfCourse = numberOfCourse()
 
 
 for i in range(NumberOfStd):
@@ -37,7 +37,7 @@ def inputMark(Course):
         if Course == ListOfCourse[i].getName():
             for j in range(NumberOfStd):
                 m = pw4.domain.Mark(ClassRoom[j].getName(), ListOfCourse[i].getName(), ListOfCourse[i].getCredit())
-                m.input()
+                m.input(ListOfCourse[i])
                 Marks.append(m)
 
 

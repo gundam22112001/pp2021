@@ -35,7 +35,7 @@ class Mark:
         self.__mark = mark
         self.__GPA = GPA
 
-    def input(self):
+    def input(self, course):
         print(f"Enter Student's mark for {self.__studentName}")
         self.__mark = float(input(f"in {self.__course}: "))
         self.__credit = Course.getCredit(course)
