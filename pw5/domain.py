@@ -1,10 +1,11 @@
 from math import *
 
 class Student:
-    def __init__(self, id="", name="", dob=""):
+    def __init__(self, id="", name="", dob="", GPA=0):
         self.__id = id
         self.__name = name
         self.__dob = dob
+        self.__GPA = GPA
 
     def getId(self):
         return self.__id
@@ -14,6 +15,12 @@ class Student:
 
     def getDob(self):
         return self.__dob
+
+    def getGPA(self):
+        return self.__GPA
+
+    def setGPA(self, GPA):
+        self.__GPA = GPA
 
     def input(self):
         self.__id = input("Enter Student Id: ")
@@ -59,8 +66,8 @@ class Mark:
         return self.__credit
 
     def __str__(self):
-        return "Student " + self.__studentName.getName() + " has a mark of " + str(
-            self.getMark()) + " in " + str(self.__course)
+        return "Student " + self.getName() + " has a mark of " + str(
+            self.getMark()) + " in " + self.getCourse()
 
     def describe(self):
         print(self.__str__())
