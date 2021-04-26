@@ -60,24 +60,24 @@ def averageMark(Name):
     AverageMark_fld = floor(AverageMark * 10) / 10
     print("Average Mark for " + Name + ": " + str(AverageMark_fld))
 
-    for mark in Marks:
-        if mark.getName() == Name:
-            mark.setGPA(AverageMark_fld)
+    for students in ClassRoom:
+        if students.getName() == Name:
+            students.setGPA(AverageMark_fld)
 
 
 # array sorting
 def arrSort():
     SortedArr = []
 
-    for i in range(len(Marks)):
+    for i in range(len(ClassRoom)):
         max_index = i
-        for j in range(i + 1, len(Marks)):
-            if Marks[max_index].getGPA() < Marks[j].getGPA():
+        for j in range(i + 1, len(ClassRoom)):
+            if ClassRoom[max_index].getGPA() < ClassRoom[j].getGPA():
                 max_index = j
-        Marks[i], Marks[max_index] = Marks[max_index], Marks[i]
+        ClassRoom[i], ClassRoom[max_index] = ClassRoom[max_index], ClassRoom[i]
 
-    for mark in Marks:
-        SortedArr.append(mark.getName())
+    for stds in ClassRoom:
+        SortedArr.append(stds.getName())
 
     print("List of Student name in order of GPA from highest to lowest :")
     print(SortedArr)
