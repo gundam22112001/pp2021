@@ -1,3 +1,5 @@
+
+# Class
 class Student:
     def __init__(self, id="", name="", dob=""):
         self.__id = id
@@ -73,37 +75,45 @@ class Course:
     def describe(self):
         print(self.__str__())
 
-
+# create arrays
 ClassRoom = []
 ListOfCourse = []
 Marks = []
 
+# find the number of students
 NumberStd = int(input("Enter number of Students: "))
 
+# adding Student objects into array ClassRoom
 for i in range(NumberStd):
     s = Student()
     s.input()
     ClassRoom += [s]
 
+# print out all the students in ClassRoom
 for student in ClassRoom:
     print(student)
 
+# find the number of courses
 NumberOfCourse = int(input("Enter number of Courses: "))
 
+# adding Course objects into array ListOfCourse
 for i in range(NumberOfCourse):
     c = Course()
     c.input()
     ListOfCourse += [c]
 
+# print out all the courses in ListOfCourse
 for c in ListOfCourse:
     print(c)
 
 
+# choose a course
 def choseCourse():
     Course = input("Enter the course name: ")
     return Course
 
 
+# input marks for all student in a Course
 def inputMark(Course):
     for i in range(NumberOfCourse):
         if Course == ListOfCourse[i].getName():
@@ -113,12 +123,14 @@ def inputMark(Course):
                 Marks.append(m)
 
 
+# print the Mark for all student in a Course
 def printMark(Course):
     for mark in Marks:
         if mark.getCourse() == Course:
             print([mark.getName(), mark.getMark()])
 
 
+# Main
 inputMark(choseCourse())
 inputMark(choseCourse())
 printMark(choseCourse())

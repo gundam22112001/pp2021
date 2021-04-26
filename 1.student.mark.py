@@ -1,11 +1,12 @@
-def inputNumberOfStd():
-    std = int(input("Enter the Number of students: "))
-    return std
-
-
+# init information arrays for a student
 ids = []
 names = []
 dobs = []
+
+
+def inputNumberOfStd():
+    std = int(input("Enter the Number of students: "))
+    return std
 
 
 def inputStd(std):
@@ -56,10 +57,10 @@ def choseCourse():
     Course=input("Enter the course name: ")
     return Course
 
-
+# create a dictionary
 Marks = {
-    "name" : [],
-    "mark" : []
+    "mark": [],
+    "name": []
 }
 
 
@@ -77,6 +78,7 @@ def showMarks(Course):
         if Course == Courses["names"][i]:
             print(Marks)
 
+# Main
 inputStd(inputNumberOfStd())
 inputCourse(inputNumberOfCourse())
 listingCourse()
