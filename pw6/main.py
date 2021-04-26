@@ -1,0 +1,144 @@
+import os
+from math import *
+import pw5.domain
+from pw5.input import numberOfCourse, numberOfStd
+import pickle
+
+if os.path.isfile('students.pickle'):
+    pickle_file = open('students.pickle', 'rb')
+    clp = pickle.load(pickle_file)
+    crsp = pickle.load(pickle_file)
+    mp = pickle.load(pickle_file)
+    for student in clp:
+        print(student)
+    for course in crsp:
+        print(course)
+    for mark in mp:
+        print(mark)
+
+# create arrays
+ClassRoom = []
+ListOfCourse = []
+Marks = []
+
+# input number of courses and students
+NumberOfStd = numberOfStd()
+NumberOfCourse = numberOfCourse()
+
+# create new text files
+f = open("students.txt", "w")
+f.close()
+g = open("courses.txt", "w")
+g.close()
+h = open("marks.txt", "w")
+h.close()
+
+# adding Student objects into array ClassRoom
+for i in range(NumberOfStd):
+    s = pw5.domain.Student()
+    s.input()
+    f = open("students.txt", "a")
+    f.write("Student's Id: " + s.getId() + "\n")
+    f.write("Student's Name: " + s.getName() + "\n")
+    f.write("Date of Birth: " + s.getDob() + "\n")
+    f.close()
+    ClassRoom += [s]
+
+# print out all the students in ClassRoom
+for student in ClassRoom:
+    print(student)
+
+# adding Course objects into array ListOfCourse
+for i in range(NumberOfCourse):
+    c = pw5.domain.Course()
+    c.input()
+    g = open("courses.txt", "a")
+    g.write("Course's Id: " + c.getId() + "\n")
+    g.write("Course's Name: " + c.getName() + "\n")
+    g.write("credit: " + str(c.getCredit()) + "\n")
+    g.close()
+    ListOfCourse += [c]
+
+# print out all the courses in ListOfCourse
+for c in ListOfCourse:
+    print(c)
+
+
+# input marks for all student in a Course
+def inputMark(Course):
+    for i in range(NumberOfCourse):
+        if Course == ListOfCourse[i].getName():
+            for j in range(NumberOfStd):
+                m = pw5.domain.Mark(ClassRoom[j].getName(), ListOfCourse[i].getName(), ListOfCourse[i].getCredit())
+                m.input(ListOfCourse[i])
+                f = open("marks.txt", "a")
+                f.write("Student's Name: " + m.getName() + "\n")
+                f.write("Mark: " + str(m.getMark()) + "\n")
+                f.close()
+                Marks.append(m)
+
+
+# print the Mark for all student in a Course
+def printMark(Course):
+    for mark in Marks:
+        if mark.getCourse() == Course:
+            print([mark.getName(), mark.getMark(), mark.getCredit()])
+
+
+# average Mark
+def averageMark(Name):
+    x = y = 0
+    for mark in Marks:
+        if mark.getName() == Name:
+            x += mark.getMark() * mark.getCredit()
+            y += mark.getCredit()
+
+    AverageMark = x / y
+    AverageMark_fld = floor(AverageMark * 10) / 10
+    print("Average Mark for " + Name + ": " + str(AverageMark_fld))
+
+    for students in ClassRoom:
+        if students.getName() == Name:
+            students.setGPA(AverageMark_fld)
+
+
+# array sorting
+def arrSort():
+    SortedArr = []
+
+    for i in range(len(ClassRoom)):
+        max_index = i
+        for j in range(i + 1, len(ClassRoom)):
+            if ClassRoom[max_index].getGPA() < ClassRoom[j].getGPA():
+                max_index = j
+        ClassRoom[i], ClassRoom[max_index] = ClassRoom[max_index], ClassRoom[i]
+
+    for stds in ClassRoom:
+        SortedArr.append(stds.getName())
+
+    print("List of Student name in order of GPA from highest to lowest :")
+    print(SortedArr)
+
+
+# main
+for course in ListOfCourse:
+    print("-----Inputting marks -----")
+    inputMark(pw5.input.choseCourse())
+
+for course in ListOfCourse:
+    print("-----Printing marks -----")
+    printMark(pw5.input.choseCourse())
+
+for std in ClassRoom:
+    print("-----Calculating GPA -----")
+    averageMark(pw5.input.chooseStudent())
+
+arrSort()
+
+p = open('students.pickle', 'wb')
+
+pickle.dump(ClassRoom, p)
+pickle.dump(ListOfCourse, p)
+pickle.dump(Marks, p)
+
+p.close()
