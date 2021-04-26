@@ -1,10 +1,12 @@
 from math import *
 
+
 class Student:
-    def __init__(self, id="", name="", dob=""):
+    def __init__(self, id="", name="", dob="", GPA=0):
         self.__id = id
         self.__name = name
         self.__dob = dob
+        self.__GPA = GPA
 
     def getId(self):
         return self.__id
@@ -14,6 +16,12 @@ class Student:
 
     def getDob(self):
         return self.__dob
+
+    def getGPA(self):
+        return self.__GPA
+
+    def setGPA(self, GPA):
+        self.__GPA = GPA
 
     def input(self):
         self.__id = input("Enter Student Id: ")
@@ -28,7 +36,7 @@ class Student:
 
 
 class Mark:
-    def __init__(self, studentName, course, mark=0, credit=0 ,GPA=0):
+    def __init__(self, studentName, course, mark=0, credit=0, GPA=0):
         self.__studentName = studentName
         self.__course = course
         self.__credit = credit
@@ -59,8 +67,8 @@ class Mark:
         return self.__credit
 
     def __str__(self):
-        return "Student " + self.__studentName.getName() + " has a mark of " + str(
-            self.getMark()) + " in " + str(self.__course)
+        return "Student " + self.getName() + " has a mark of " + str(
+            self.getMark()) + " in " + self.getCourse()
 
     def describe(self):
         print(self.__str__())
@@ -91,6 +99,7 @@ class Course:
 
     def describe(self):
         print(self.__str__())
+
 
 # create arrays
 ClassRoom = []
@@ -152,6 +161,7 @@ def chooseStudent():
     stdName = input("Enter a Student's name: ")
     return stdName
 
+
 # average Mark
 def averageMark(Name):
     x = y = 0
@@ -164,36 +174,37 @@ def averageMark(Name):
     AverageMark_fld = floor(AverageMark * 10) / 10
     print("Average Mark for " + Name + ": " + str(AverageMark_fld))
 
-    for mark in Marks:
-        if mark.getName() == Name:
-            mark.setGPA(AverageMark_fld)
+    for students in ClassRoom:
+        if students.getName() == Name:
+            students.setGPA(AverageMark_fld)
 
 
 # array sorting
 def arrSort():
     SortedArr = []
 
-    for i in range(len(Marks)):
+    for i in range(len(ClassRoom)):
         max_index = i
-        for j in range(i + 1, len(Marks)):
-            if Marks[max_index].getGPA() < Marks[j].getGPA():
+        for j in range(i + 1, len(ClassRoom)):
+            if ClassRoom[max_index].getGPA() < ClassRoom[j].getGPA():
                 max_index = j
-        Marks[i], Marks[max_index] = Marks[max_index], Marks[i]
+        ClassRoom[i], ClassRoom[max_index] = ClassRoom[max_index], ClassRoom[i]
 
-    for mark in Marks:
-        SortedArr.append(mark.getName())
+    for stds in ClassRoom:
+        SortedArr.append(stds.getName())
 
     print("List of Student name in order of GPA from highest to lowest :")
     print(SortedArr)
+
 
 # main
 for course in ListOfCourse:
     print("-----Inputting marks -----")
     inputMark(choseCourse())
 
-#for course in ListOfCourse:
-    #print("-----Printing marks -----")
-    #printMark(choseCourse())
+for course in ListOfCourse:
+    print("-----Printing marks -----")
+    printMark(choseCourse())
 
 for std in ClassRoom:
     print("-----Calculating GPA -----")
